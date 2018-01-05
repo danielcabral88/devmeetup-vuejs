@@ -5,6 +5,7 @@ import * as firebase from 'firebase'
 import router from './router'
 import { store } from './store'
 import DateFilter from './filters/date'
+import AlertComp from './components/Shared/Alert.vue'
 
 import {
   Vuetify,
@@ -21,7 +22,9 @@ import {
   VCard,
   VTextField,
   VTimePicker,
-  VDatePicker
+  VDatePicker,
+  VAlert,
+  VProgressCircular
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
 
@@ -40,13 +43,16 @@ Vue.use(Vuetify, {
     VCard,
     VTextField,
     VTimePicker,
-    VDatePicker
+    VDatePicker,
+    VAlert,
+    VProgressCircular
   }
 })
 // Vue.use(Vuetify)
 Vue.config.productionTip = false
 
 Vue.filter('date', DateFilter)
+Vue.component('app-alert', AlertComp)
 
 /* eslint-disable no-new */
 new Vue({
@@ -63,5 +69,6 @@ new Vue({
       storageBucket: 'devmeetup-vue.appspot.com',
       messagingSenderId: '611107708428'
     })
+    this.$store.dispatch('loadMeetups')
   }
 })
