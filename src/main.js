@@ -66,8 +66,13 @@ new Vue({
       authDomain: 'devmeetup-vue.firebaseapp.com',
       databaseURL: 'https://devmeetup-vue.firebaseio.com',
       projectId: 'devmeetup-vue',
-      storageBucket: 'devmeetup-vue.appspot.com',
+      storageBucket: 'gs://devmeetup-vue.appspot.com',
       messagingSenderId: '611107708428'
+    })
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.dispatch('autoSignIn', user)
+      }
     })
     this.$store.dispatch('loadMeetups')
   }
