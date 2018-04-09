@@ -6,6 +6,7 @@ import router from './router'
 import { store } from './store'
 import DateFilter from './filters/date'
 import AlertComp from './components/Shared/Alert.vue'
+import EditMeetupDeatils from './components/Meetup/Edit/EditMeetupDetailsDialog.vue'
 
 import {
   Vuetify,
@@ -24,7 +25,9 @@ import {
   VTimePicker,
   VDatePicker,
   VAlert,
-  VProgressCircular
+  VProgressCircular,
+  VDialog,
+  VDivider
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
 
@@ -45,7 +48,9 @@ Vue.use(Vuetify, {
     VTimePicker,
     VDatePicker,
     VAlert,
-    VProgressCircular
+    VProgressCircular,
+    VDialog,
+    VDivider
   }
 })
 // Vue.use(Vuetify)
@@ -53,6 +58,7 @@ Vue.config.productionTip = false
 
 Vue.filter('date', DateFilter)
 Vue.component('app-alert', AlertComp)
+Vue.component('app-edit-meetup-details-dialog', EditMeetupDeatils)
 
 /* eslint-disable no-new */
 new Vue({
