@@ -1,13 +1,24 @@
 <template>
 	<v-container>
-		<v-layout row wrap>
+		<v-layout row wrap v-if="loading">
+      <v-flex xs12 class="text-xs-center">
+        <v-progress-circular 
+          indeterminate 
+          v-bind:size="70"
+          v-bind:width="7"
+          color="primary"
+          v-if="loading"></v-progress-circular>
+      </v-flex>
+    </v-layout>
+		<v-layout row wrap v-else>
 			<v-flex xs12>
 				<v-card>
 					<v-card-title>
 						<h4 class="primary--text">{{ meetup.title }}</h4>
 						<template v-if="userIsCreator">
 							<v-spacer></v-spacer>
-							<app-edit-meetup-details-dialog></app-edit-meetup-details-dialog>
+							<app-edit-meetup-details-dialog
+							:meetup="meetup"></app-edit-meetup-details-dialog>
 						</template>
 					</v-card-title>
 					<v-card-media
@@ -44,8 +55,10 @@ export default {
       }
       console.log(this.$store.getters.user.id)
       console.log(this.meetup.creatorId)
-      console.log(this.meetup.title)
       return this.$store.getters.user.id === this.meetup.creatorId
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   }
 }
